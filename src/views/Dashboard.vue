@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <h3 v-if="user.firstName.length > 0 && user.lastName.length > 0">
-        Welcome {{ user.firstNam + " " + user.lastName }}
+        Welcome {{ user.firstName + " " + user.lastName }}
       </h3>
       <h3 v-else-if="user.firstName.length > 0 && user.lastName.length <= 0">
         Welcome {{ user.firstName }}
