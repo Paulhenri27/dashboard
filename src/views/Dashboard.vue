@@ -429,7 +429,7 @@ export default {
           labels: this.transactions.map((t) => t.description),
           datasets: [
             {
-              label: 'Amoun',
+              label: 'Amount',
               data: this.transactions.map((t) => t.amount),
               backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
             },
