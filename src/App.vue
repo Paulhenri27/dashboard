@@ -9,5 +9,16 @@
 </template>
 
 <style scoped>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+</style>
 
+<style>
+body{
+  margin: 0;
+  padding: 0;
+}
 </style>
