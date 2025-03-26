@@ -25,6 +25,13 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px;
+  width: 250px;
+  text-align: center;
+}
+
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .value {
   font-size: 24px;

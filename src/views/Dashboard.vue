@@ -41,7 +41,7 @@
           </div>
           <div>
             <label for="amount">Amount:</label>
-            <input type="number" v-model="transaction.amount" required />
+            <input type="text" v-model="transaction.amount" required />
           </div>
           <div>
             <label for="date">Date:</label>
@@ -350,7 +350,15 @@ export default {
   display: flex;
 }
 
+main{
+  flex: 5;
+}
 
+.cards{
+  display: flex;
+  justify-content: center;
+}
+/* Popup overlay */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -363,23 +371,86 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+/* Popup form */
 .popup-form {
   background-color: white;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 400px;
   z-index: 20;
+  font-family: Arial, sans-serif;
 }
-table {
+
+.popup-form form div{
+  margin: 20px 0;
+  margin-right: 15px;
+}
+
+/* Form heading */
+.popup-form h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Form labels */
+.popup-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Form inputs */
+.popup-form input,
+.popup-form select {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
 }
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+
+/* Focus state for inputs */
+.popup-form input:focus,
+.popup-form select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+
+/* Buttons */
+.popup-form button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup-form button:hover {
+  background-color: #0056b3;
+}
+
+.popup-form button[type="button"] {
+  margin-left: 16px;
+  background-color: #dc3545;
+}
+
+.popup-form button[type="button"]:hover {
+  background-color: #c82333;
 }
 
 .balance-chart {
@@ -387,4 +458,13 @@ table td {
   height: 300px;
   margin-top: 20px;
 }
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .popup-form {
+    width: 90%;
+  }
+}
+
+
+
 </style>

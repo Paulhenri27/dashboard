@@ -4,7 +4,7 @@
       Welcome {{ user.firstName }} {{ user.lastName }}
     </h3>
     <h3 v-else>Welcome</h3>
-    <p>Balance: {{ balance }}</p>
+<!--    <p>Balance: {{ balance }}</p>-->
     <button @click="openTransactionForm">Add Transaction</button>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
   color: white;
   width: 250px;
   padding: 20px;
+  flex: 1;
 }
 .sidebar h3 {
   margin-bottom: 20px;
