@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     login() {
-      fetch("http://rhea.sasg.de:8080/login", {
+      fetch("https://finance.rhea.comagno.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

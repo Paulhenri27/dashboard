@@ -43,7 +43,7 @@ export default {
   methods: {
     handleSubmit() {
       // Send the user data to the server
-      fetch("http://rhea.sasg.de:8080/register", {
+      fetch("https://finance.rhea.comagno.com/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

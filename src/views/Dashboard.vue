@@ -119,7 +119,7 @@ export default {
       const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
       const email = payload.sub;
 
-      fetch("http://rhea.sasg.de:8080/get-user", {
+      fetch("https://finance.rhea.comagno.com/get-user", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -139,7 +139,7 @@ export default {
           });
     },
     getCategories() {
-      fetch("http://rhea.sasg.de:8080/get-categories", {
+      fetch("https://finance.rhea.comagno.com/get-categories", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -157,7 +157,7 @@ export default {
           });
     },
     fetchTransactionsByDescription(description) {
-      let url = "http://rhea.sasg.de:8080/get-by-description?";
+      let url = "https://finance.rhea.comagno.com/get-by-description?";
       if (description.trim()) {
         url += `description=${encodeURIComponent(description)}`;
       } else {
@@ -197,7 +197,7 @@ export default {
         params.append("endDate", end.toISOString());
       }
 
-      const url = `http://rhea.sasg.de:8080/get-transactions-by-date?${params.toString()}`;
+      const url = `https://finance.rhea.comagno.com/get-transactions-by-date?${params.toString()}`;
 
       fetch(url, {
         method: "GET",
@@ -223,7 +223,7 @@ export default {
         this.transaction.amount = -Math.abs(this.transaction.amount);
       }
 
-      fetch("http://rhea.sasg.de:8080/add-transaction", {
+      fetch("https://finance.rhea.comagno.com/add-transaction", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -254,7 +254,7 @@ export default {
       if (transaction) {
         params.append("transactionId", transaction.id);
       }
-      const url = `http://rhea.sasg.de:8080/delete-transaction?${params}`;
+      const url = `https://finance.rhea.comagno.com/delete-transaction?${params}`;
 
       fetch(url, {
         method: "GET",
@@ -276,7 +276,7 @@ export default {
           });
     },
     fetchTransactionsByAscendingOrder() {
-      fetch("http://rhea.sasg.de:8080/get-transactions", {
+      fetch("https://finance.rhea.comagno.com/get-transactions", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
