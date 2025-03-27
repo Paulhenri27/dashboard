@@ -350,9 +350,9 @@ export default {
 
 <style scoped>
 
-.content{
-  padding: 100px;
-}
+//.content{
+//  padding: 100px;
+//}
 
 
 main{
