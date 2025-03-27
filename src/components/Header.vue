@@ -1,23 +1,37 @@
 <template>
   <div class="header">
     <div class="search-bar">
-      <i class="fas fa-search"></i>
-      <input
-          type="text"
-          v-model="descriptionSearch"
-          @input="$emit('search', descriptionSearch)"
-          placeholder="Search description..."
-      />
+<!--      <i class="fas fa-search"></i>-->
+<!--      <input-->
+<!--          type="text"-->
+<!--          v-model="descriptionSearch"-->
+<!--          @input="$emit('search', descriptionSearch)"-->
+<!--          placeholder="Search description..."-->
+<!--      />-->
+      <div class="welcome">
+        <h3 v-if="user.firstName && user.lastName">
+          Welcome {{ user.firstName }} {{ user.lastName }}
+        </h3>
+        <h3 v-else>Welcome</h3>
+        <!--    <p>Balance: {{ balance }}</p>-->
+      </div>
+      <button @click="openTransactionForm">Add Transaction</button>
     </div>
+
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      descriptionSearch: "",
-    };
+  // data() {
+  //   return {
+  //     descriptionSearch: "",
+  //   };
+  // },
+  props: {
+    user: Object,
+    balance: Number,
+    openTransactionForm: Function,
   },
 };
 </script>
@@ -25,18 +39,30 @@ export default {
 <style scoped>
 .header {
   padding: 10px 20px;
-  background: #f0f4f8;
+  background-color: #0056B3;
+  color: #F3F5F7;
   border-bottom: 1px solid #e2e8f0;
 }
-.search-bar {
+
+.search-bar{
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
-.search-bar input {
-  border: none;
-  outline: none;
-  padding: 8px 12px;
-  border-radius: 20px;
-  width: 200px;
+
+.search-bar button{
+  padding: 16px 18px;
+  background-color: #F3F5F7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover{
+  background-color: #5B38ED;
+  color: #F3F5F7;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="dashboard">
-    <Header @search="fetchTransactionsByDescription" />
+    <Header :user="user" :balance="balance" :openTransactionForm="openTransactionForm"/>
     <div class="content">
-      <Sidebar :user="user" :balance="balance" :openTransactionForm="openTransactionForm" />
+<!--      <Sidebar :user="user" :balance="balance" :openTransactionForm="openTransactionForm" />-->
       <main>
-        <h2>Finance Tracker</h2>
+<!--        <h2>Finance Tracker</h2>-->
         <div class="cards">
           <Card title="Total Balance" :value="balance" subValue="USD" bgColor="#fffaf0" />
           <Card title="Total Spending" :value="totalSpending" subValue="USD" bgColor="#f0f9ff" />
@@ -219,7 +219,7 @@ export default {
           });
     },
     addTransaction() {
-      if (this.transaction.category.name === "Spending") {
+      if (this.transaction.category.name === "Spending" || this.transaction.category.name === "Investment" || this.transaction.category.name === "Debt" ) {
         this.transaction.amount = -Math.abs(this.transaction.amount);
       }
 
@@ -244,6 +244,7 @@ export default {
               category: { name: "" },
             };
             this.fetchTransactionsByAscendingOrder();
+            this.calculateDailyBalance();
           })
           .catch((error) => {
             console.error("Error adding transaction:", error.message);
@@ -268,8 +269,10 @@ export default {
           })
           .then((data) => {
             this.transactions = data;
+            console.log(this.transactions);
             this.balance = data.reduce((sum, t) => sum + t.amount, 0);
             this.renderChart();
+            this.calculateDailyBalance();
           })
           .catch((error) => {
             console.error("Error deleting transaction:", error.message);
@@ -346,9 +349,11 @@ export default {
 </script>
 
 <style scoped>
+
 .content{
-  display: flex;
+  padding: 100px;
 }
+
 
 main{
   flex: 5;
