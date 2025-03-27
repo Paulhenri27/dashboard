@@ -5,6 +5,7 @@
 <!--      <Sidebar :user="user" :balance="balance" :openTransactionForm="openTransactionForm" />-->
       <main>
 <!--        <h2>Finance Tracker</h2>-->
+<!--        <button @click="startTour" class="tour-button">Start Tour</button>-->
         <div class="cards">
           <Card title="Total Balance" :value="balance" subValue="USD" bgColor="#fffaf0" />
           <Card title="Total Spending" :value="totalSpending" subValue="USD" bgColor="#f0f9ff" />
@@ -70,6 +71,7 @@ import Card from "../components/Card.vue";
 import PieChart from "../components/PieChart.vue";
 import LineChart from "../components/LineChart.vue";
 import Table from "../components/Table.vue";
+import { createDashboardTour } from "../services/tourService";
 
 export default {
   components: { Header, Sidebar, Card, PieChart, LineChart, Table },
@@ -87,6 +89,7 @@ export default {
         category: { name: "" },
       },
       dailyBalances: [],
+      tour: null,
     };
   },
   computed: {
@@ -102,7 +105,13 @@ export default {
     },
   },
   mounted() {
+    const isFirstLogin = localStorage.getItem("firstLogin") === "true";
     this.getUser();
+    if(isFirstLogin)
+    {
+      this.startTour();
+      localStorage.removeItem("firstLogin");
+    }
     this.getCategories();
     this.fetchTransactionsByAscendingOrder();
   },
@@ -344,6 +353,10 @@ export default {
         },
       });
     },
+    startTour() {
+      this.tour = createDashboardTour();
+      this.tour.start();
+    },
   },
 };
 </script>
@@ -373,6 +386,16 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.tour-button {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 /* Popup form */

@@ -49,7 +49,6 @@ export default {
           .then((token) => {
             // Store the token in localStorage
             localStorage.setItem('token', token);
-            console.log("Login successful!");
             this.$router.push('/dashboard');
           })
           .catch((error) => {

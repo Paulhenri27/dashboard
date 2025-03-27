@@ -52,6 +52,7 @@ export default {
       })
           .then((response) => {
             if (response.ok) {
+              localStorage.setItem("firstLogin", "true");
               this.$router.push('/login')
               return response.json();
             } else {
