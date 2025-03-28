@@ -470,6 +470,10 @@ main{
   background-color: #0056b3;
 }
 
+.recent-transactions{
+  padding: 100px;
+}
+
 .popup-form button[type="button"] {
   margin-left: 16px;
   background-color: #dc3545;

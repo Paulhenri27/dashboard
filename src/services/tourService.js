@@ -28,7 +28,7 @@ export function createDashboardTour() {
             cancelIcon: {
                 enabled: true, // Show a close icon to exit the tour
             },
-            classes: "shepherd-theme-arrows", // Use a predefined theme
+            classes: "shepherd-theme-dark", // Use a predefined theme
             scrollTo: { behavior: "smooth", block: "center" }, // Smooth scrolling
         },
     });
@@ -89,7 +89,7 @@ export function createDashboardTour() {
 
     tour.addStep({
         id: "pie-chart",
-        text: "This pie chart shows a breakdown of your transactions by category.",
+        text: "After adding transactions,a pie chart will show a breakdown of your transactions by category , date and description.",
         attachTo: {
             element: ".chart", // Attach to the pie chart section
             on: "top",
@@ -108,7 +108,7 @@ export function createDashboardTour() {
 
     tour.addStep({
         id: "balance-chart",
-        text: "This line chart shows your daily balance over time.",
+        text: "This line chart will show your daily balance over time.",
         attachTo: {
             element: ".balance-chart", // Attach to the balance chart section
             on: "top",
