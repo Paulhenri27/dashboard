@@ -1,4 +1,5 @@
 <template>
+  <div>
   <table>
     <thead>
     <tr>
@@ -33,7 +34,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(transaction, index) in transactions" :key="index">
+    <tr v-for="(transaction, index) in paginatedTransactions" :key="index">
       <td>{{ transaction.description }}</td>
       <td>{{ transaction.amount }}</td>
       <td>{{ formatDate(transaction.date) }}</td>
@@ -48,6 +49,24 @@
     </tr>
     </tbody>
   </table>
+  <div class="pagination-controls">
+    <button
+        @click="prevPage"
+        :disabled="currentPage === 1"
+        class="pagination-button"
+    >
+      Previous
+    </button>
+    <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+        @click="nextPage"
+        :disabled="currentPage === totalPages"
+        class="pagination-button"
+    >
+      Next
+    </button>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -73,7 +92,19 @@ export default {
         endDate: "",
         categoryName: "",
       },
+      currentPage: 1,
+      pageSize: 12,
     };
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.transactions.length / this.pageSize);
+    },
+    paginatedTransactions() {
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.transactions.slice(start, end);
+    }
   },
   methods: {
     toggleCalendar() {
@@ -87,12 +118,8 @@ export default {
       };
       this.$emit("applyFilters", filters);
       this.showCalendar = false; // Hide the calendar after applying filters
+      this.currentPage = 1;
     },
-    // formatDate(dateString)
-    // {
-    //   const date = new Date(dateString);
-    //   return date.toLocaleDateString();
-    // },
     formatDate(dateString) {
       const date = new Date(dateString);
       const day = String(date.getDate()).padStart(2, '0');
@@ -100,6 +127,22 @@ export default {
       const year = date.getFullYear();
       return `${day}/${month}/${year}`;
     },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    }
+  },
+  watch: {
+    // Reset pagination when transactions array changes
+    transactions() {
+      this.currentPage = 1;
+    }
   },
 };
 </script>
@@ -198,6 +241,40 @@ td button:hover {
   justify-content: space-between;
 }
 
+/* Add this to your existing <style> block */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.pagination-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 14px;
+  color: #666;
+}
+
 
 
 /* Responsive adjustments */
@@ -210,6 +287,10 @@ td button:hover {
 
   .calendar-modal input[type="date"] {
     width: 100%;
+  }
+  .pagination-controls {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
